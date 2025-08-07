@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Game, addGame, getGames, updateGame, deleteGame } from "@/lib/games";
+import { Game, addGame, getGames, updateGame, deleteGame } from "../../../lib/games";
 import { Plus, Edit, Trash2, Save, X } from "lucide-react";
 
 export default function AdminGamesPage() {
