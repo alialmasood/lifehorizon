@@ -74,11 +74,6 @@ const nextConfig = {
   // إعدادات API Routes
   serverExternalPackages: ['firebase'],
   
-  // إعدادات للـ experimental features
-  experimental: {
-    serverComponentsExternalPackages: ['firebase'],
-  },
-  
   // إعدادات للـ webpack
   webpack: (config, { isServer }) => {
     if (!isServer) {
