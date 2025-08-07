@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { AREEBA_CONFIG, generateTransactionId, getBase64Auth } from '@/lib/areeba-config';
+import { AREEBA_CONFIG, generateTransactionId, getBase64Auth } from '../../../../lib/areeba-config';
 
 // إعدادات للـ API route
 export const dynamic = 'force-dynamic';

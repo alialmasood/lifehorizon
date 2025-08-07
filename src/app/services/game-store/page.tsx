@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Download, Info, Play, ShoppingCart } from "lucide-react";
-import { Game, getGames, incrementDownloads } from "@/lib/games";
+import { Game, getGames, incrementDownloads } from "../../../lib/games";
 
 export default function GameStorePage() {
   const [games, setGames] = useState<Game[]>([]);
