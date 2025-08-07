@@ -3,16 +3,13 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Download, Info, Play, ShoppingCart } from "lucide-react";
-import { Game, getGames, incrementDownloads } from "@/lib/games";
-import { PurchaseModal } from "@/components/games/purchase-modal";
+import { Game, getGames, incrementDownloads } from "../../../../lib/games";
 
 export default function GameStorePage() {
   const [games, setGames] = useState<Game[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedGame, setSelectedGame] = useState<Game | null>(null);
   const [showModal, setShowModal] = useState(false);
-  const [showPurchaseModal, setShowPurchaseModal] = useState(false);
-  const [purchaseGame, setPurchaseGame] = useState<Game | null>(null);
 
   useEffect(() => {
     loadGames();
@@ -38,17 +35,13 @@ export default function GameStorePage() {
   };
 
   const handlePurchase = (game: Game) => {
-    setPurchaseGame(game);
-    setShowPurchaseModal(true);
-  };
-
-  const handlePurchaseSuccess = async () => {
-    if (purchaseGame) {
-      // زيادة عدد التحميلات
-      await incrementDownloads(purchaseGame.id!);
-      // إعادة تحميل الألعاب لتحديث البيانات
-      await loadGames();
-    }
+    // توجيه مباشر إلى صفحة الدفع
+    const params = new URLSearchParams({
+      amount: game.price.toString(),
+      game_id: game.id || '',
+      game_title: encodeURIComponent(game.title)
+    });
+    window.location.href = `/payment/checkout/?${params.toString()}`;
   };
 
   const handleDownload = async (game: Game) => {
@@ -351,14 +344,6 @@ export default function GameStorePage() {
           </div>
         </div>
       )}
-
-      {/* Purchase Modal */}
-      <PurchaseModal
-        game={purchaseGame}
-        isOpen={showPurchaseModal}
-        onClose={() => setShowPurchaseModal(false)}
-        onPurchaseSuccess={handlePurchaseSuccess}
-      />
     </main>
   );
 } 
